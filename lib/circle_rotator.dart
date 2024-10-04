@@ -28,7 +28,7 @@ class CircleRotator extends PositionComponent with HasGameRef<MyGame> {
           sweepAngle: sweep));
     }
     add(RotateEffect.to(
-        math.pi * 2, EffectController(speed: 1, infinite: true)));
+        math.pi * 2, EffectController(speed: 2, infinite: true)));
     super.onLoad();
   }
 }

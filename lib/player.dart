@@ -2,14 +2,18 @@ import 'package:color_switch/circle_rotator.dart';
 import 'package:color_switch/color_switcher.dart';
 import 'package:color_switch/game.dart';
 import 'package:color_switch/ground.dart';
+import 'package:color_switch/star_component.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/image_composition.dart';
+import 'package:flame/particles.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
 class Player extends PositionComponent
     with HasGameRef<MyGame>, CollisionCallbacks {
-  Player({required super.position, this.playerRadius = 13.0});
+  Player({required super.position, this.playerRadius = 13.0})
+      : super(priority: 20);
   final _velocity = Vector2.zero();
   final _gravity = 980.0;
   final _jumpSpeed = 350.0;
@@ -67,6 +71,11 @@ class Player extends PositionComponent
       if (_color != other.color) {
         gameRef.gameOver();
       }
+    } else if (other is StarComponent) {
+      other.showCollectionEffect();
+      gameRef.increaseScore();
+      FlameAudio.play("score.wav", volume: 0.030);
+      gameRef.generateNextBatch(other);
     }
   }
 
