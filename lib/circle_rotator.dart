@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:color_switch/game.dart';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,6 @@ class CircleRotator extends PositionComponent with HasGameRef<MyGame> {
   final double thickness, rotationSpeed;
 
   @override
-  void onMount() {
-    position = Vector2.zero();
-    super.onMount();
-  }
-
-  @override
   void onLoad() {
     const circle = math.pi * 2;
     final sweep = circle / gameRef.gameColors.length;
@@ -35,12 +30,6 @@ class CircleRotator extends PositionComponent with HasGameRef<MyGame> {
     add(RotateEffect.to(
         math.pi * 2, EffectController(speed: 1, infinite: true)));
     super.onLoad();
-  }
-
-  @override
-  void update(double dt) {
-    angle += 0.01;
-    super.update(dt);
   }
 }
 
@@ -57,6 +46,7 @@ class CircleArc extends PositionComponent with ParentIsA<CircleRotator> {
   void onMount() {
     size = parent.size;
     position = size / 2;
+    _addHitBox();
     super.onMount();
   }
 
@@ -72,5 +62,26 @@ class CircleArc extends PositionComponent with ParentIsA<CircleRotator> {
           ..style = PaintingStyle.stroke
           ..strokeWidth = parent.thickness);
     super.render(canvas);
+  }
+
+  void _addHitBox() {
+    final center = size / 2,
+        precision = 8,
+        segment = sweepAngle / (precision - 1),
+        radius = size.x / 2;
+
+    List<Vector2> vertices = [];
+    for (int i = 0; i < precision; i++) {
+      final thisSegment = startAngle + segment * i;
+      vertices.add(center +
+          Vector2(math.cos(thisSegment), math.sin(thisSegment)) * radius);
+    }
+    for (int i = precision - 1; i >= 0; i--) {
+      final thisSegment = startAngle + segment * i;
+      vertices.add(center +
+          Vector2(math.cos(thisSegment), math.sin(thisSegment)) *
+              (radius - parent.thickness));
+    }
+    add(PolygonHitbox(vertices, collisionType: CollisionType.passive));
   }
 }
