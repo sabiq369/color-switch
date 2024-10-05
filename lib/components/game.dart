@@ -40,11 +40,11 @@ class MyGame extends FlameGame
   Future<void> onLoad() async {
     await super.onLoad();
     decorator = PaintDecorator.blur(0);
-    FlameAudio.bgm.initialize();
+    // FlameAudio.bgm.initialize();
     await Flame.images.loadAll(['finger_tap.png', 'white_star.png']);
-    await FlameAudio.audioCache.loadAll(
-      ['bg_music.mp3', 'score.wav'],
-    );
+    // await FlameAudio.audioCache.loadAll(
+    //   ['bg_music.mp3', 'score.wav'],
+    // );
   }
 
   @override
@@ -119,7 +119,7 @@ class MyGame extends FlameGame
   }
 
   gameOver() {
-    FlameAudio.bgm.stop();
+    // FlameAudio.bgm.stop();
     for (var element in world.children) {
       element.removeFromParent();
     }
@@ -132,14 +132,14 @@ class MyGame extends FlameGame
   pauseGame() {
     (decorator as PaintDecorator).addBlur(10);
     timeScale = 0.0;
-    FlameAudio.bgm.pause();
+    // FlameAudio.bgm.pause();
   }
 
   resumeGame() {
     (decorator as PaintDecorator).addBlur(0);
     timeScale = 1.0;
 
-    FlameAudio.bgm.resume();
+    // FlameAudio.bgm.resume();
   }
 
   void _initializeGame() {
@@ -148,7 +148,7 @@ class MyGame extends FlameGame
     world.add(player = Player(position: Vector2(0, 250)));
     camera.moveTo(Vector2(0, 0));
     _generateGameComponents(Vector2(0, 20));
-    FlameAudio.bgm.play("bg_music.mp3", volume: 0.25);
+    // FlameAudio.bgm.play("bg_music.mp3", volume: 0.25);
   }
 
   void increaseScore() => currentScore.value++;
