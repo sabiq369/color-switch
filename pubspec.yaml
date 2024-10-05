@@ -38,6 +38,7 @@ dependencies:
   flame:
   flame_audio:
   lottie:
+  flame_lottie:
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:color_switch/game.dart';
+import 'package:color_switch/components/game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
@@ -28,7 +28,7 @@ class CircleRotator extends PositionComponent with HasGameRef<MyGame> {
           sweepAngle: sweep));
     }
     add(RotateEffect.to(
-        math.pi * 2, EffectController(speed: 2, infinite: true)));
+        math.pi * 2, EffectController(speed: rotationSpeed, infinite: true)));
     super.onLoad();
   }
 }
@@ -36,6 +36,7 @@ class CircleRotator extends PositionComponent with HasGameRef<MyGame> {
 class CircleArc extends PositionComponent with ParentIsA<CircleRotator> {
   final Color color;
   final double startAngle, sweepAngle;
+  final _arcPaint = Paint();
 
   CircleArc({
     required this.color,
@@ -57,7 +58,7 @@ class CircleArc extends PositionComponent with ParentIsA<CircleRotator> {
         startAngle,
         sweepAngle,
         false,
-        Paint()
+        _arcPaint
           ..color = color
           ..style = PaintingStyle.stroke
           ..strokeWidth = parent.thickness);

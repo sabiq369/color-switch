@@ -1,12 +1,11 @@
-import 'package:color_switch/circle_rotator.dart';
-import 'package:color_switch/color_switcher.dart';
-import 'package:color_switch/game.dart';
-import 'package:color_switch/ground.dart';
-import 'package:color_switch/star_component.dart';
+import 'package:color_switch/components/circle_rotator.dart';
+import 'package:color_switch/components/color_switcher.dart';
+import 'package:color_switch/components/game.dart';
+import 'package:color_switch/components/ground.dart';
+import 'package:color_switch/components/star_component.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/image_composition.dart';
-import 'package:flame/particles.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +18,7 @@ class Player extends PositionComponent
   final _jumpSpeed = 350.0;
   final playerRadius;
   Color _color = Colors.white;
+  final _playerPaint = Paint();
 
   @override
   void onLoad() {
@@ -53,7 +53,7 @@ class Player extends PositionComponent
   void render(Canvas canvas) {
     super.render(canvas);
     canvas.drawCircle(
-        (size / 2).toOffset(), playerRadius, Paint()..color = _color);
+        (size / 2).toOffset(), playerRadius, _playerPaint..color = _color);
   }
 
   jump() {
@@ -74,7 +74,7 @@ class Player extends PositionComponent
     } else if (other is StarComponent) {
       other.showCollectionEffect();
       gameRef.increaseScore();
-      FlameAudio.play("score.wav", volume: 0.030);
+      FlameAudio.play("score.wav", volume: 0.4);
       gameRef.generateNextBatch(other);
     }
   }

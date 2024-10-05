@@ -1,13 +1,12 @@
-import 'package:color_switch/game.dart';
+import 'package:color_switch/components/game.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      home: HomePage(),
+      home: const HomePage(),
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
     ),
@@ -15,7 +14,7 @@ void main() {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -36,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         body: SafeArea(
           child: ValueListenableBuilder(
             valueListenable: _myGame.mute,
@@ -53,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                             _myGame.pauseGame();
                           });
                         },
-                        icon: Icon(Icons.pause)),
+                        icon: const Icon(Icons.pause)),
                   Align(
                     alignment: Alignment.topCenter,
                     child: SafeArea(
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                         builder: (context, value, child) {
                           return Text(
                             'Score: ${value.toString()}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white),
@@ -86,8 +85,8 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           icon: mute
-                              ? Icon(Icons.music_off)
-                              : Icon(Icons.music_note)),
+                              ? const Icon(Icons.music_off)
+                              : const Icon(Icons.music_note)),
                     ),
                   if (_myGame.isGamePaused)
                     Container(
@@ -96,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'PAUSED!',
                               style: TextStyle(
                                 fontSize: 40,
@@ -111,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                                   _myGame.resumeGame();
                                 });
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.play_arrow,
                                 color: Colors.white,
                                 size: 40,

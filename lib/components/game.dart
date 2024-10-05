@@ -1,8 +1,8 @@
-import 'package:color_switch/circle_rotator.dart';
-import 'package:color_switch/color_switcher.dart';
-import 'package:color_switch/ground.dart';
-import 'package:color_switch/player.dart';
-import 'package:color_switch/star_component.dart';
+import 'package:color_switch/components/circle_rotator.dart';
+import 'package:color_switch/components/color_switcher.dart';
+import 'package:color_switch/components/ground.dart';
+import 'package:color_switch/components/player.dart';
+import 'package:color_switch/components/star_component.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
@@ -28,14 +28,14 @@ class MyGame extends FlameGame
       ]});
 
   @override
-  Color backgroundColor() => Color(0xff222222);
+  Color backgroundColor() => const Color(0xff222222);
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
     decorator = PaintDecorator.blur(0);
     FlameAudio.bgm.initialize();
-    await Flame.images.loadAll(['finger_tap.png', 'star.png']);
+    await Flame.images.loadAll(['finger_tap.png', 'white_star.png']);
     await FlameAudio.audioCache.loadAll(
       ['bg_music.mp3', 'score.wav'],
     );
@@ -143,7 +143,7 @@ class MyGame extends FlameGame
     world.add(player = Player(position: Vector2(0, 250)));
     camera.moveTo(Vector2(0, 0));
     _generateGameComponents(Vector2(0, 20));
-    FlameAudio.bgm.play("bg_music.mp3", volume: 0.099);
+    FlameAudio.bgm.play("bg_music.mp3", volume: 0.25);
   }
 
   void increaseScore() => currentScore.value++;
