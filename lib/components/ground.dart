@@ -5,7 +5,7 @@ class Ground extends PositionComponent {
   static const String keyName = 'single_ground_key';
   Ground({required super.position})
       : super(
-          size: Vector2(100, 1),
+          size: Vector2(200, 2),
           anchor: Anchor.center,
           key: ComponentKey.named(keyName),
         );
@@ -23,7 +23,8 @@ class Ground extends PositionComponent {
   void render(Canvas canvas) {
     fingerSprite.render(
       canvas,
-      size: Vector2(110, 110),
+      position: Vector2(56, 0),
+      size: Vector2(100, 100),
     );
     super.render(canvas);
   }

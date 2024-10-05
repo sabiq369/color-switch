@@ -43,6 +43,7 @@ class Player extends PositionComponent
     position += _velocity * dt;
     Ground ground = gameRef.findByKeyName(Ground.keyName)!;
     if (positionOfAnchor(Anchor.bottomCenter).y > ground.position.y) {
+      _velocity.setValues(0, 0);
       position = Vector2(0, ground.position.y - (height / 2));
     } else {
       _velocity.y += _gravity * dt;
@@ -72,9 +73,9 @@ class Player extends PositionComponent
         gameRef.gameOver();
       }
     } else if (other is StarComponent) {
+      FlameAudio.play("score.wav", volume: 0.4);
       other.showCollectionEffect();
       gameRef.increaseScore();
-      FlameAudio.play("score.wav", volume: 0.4);
       gameRef.generateNextBatch(other);
     }
   }

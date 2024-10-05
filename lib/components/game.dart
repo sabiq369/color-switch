@@ -25,7 +25,13 @@ class MyGame extends FlameGame
         Colors.yellowAccent,
         Colors.blueAccent,
         Colors.purpleAccent
-      ]});
+      ]})
+      : super(
+          camera: CameraComponent.withFixedResolution(
+            width: 600,
+            height: 1000,
+          ),
+        );
 
   @override
   Color backgroundColor() => const Color(0xff222222);
@@ -55,7 +61,6 @@ class MyGame extends FlameGame
     if (playerY < cameraY) {
       camera.viewfinder.position = Vector2(0, playerY);
     }
-    // camera.viewfinder.zoom = 0.05;
     super.update(dt);
   }
 
@@ -139,7 +144,7 @@ class MyGame extends FlameGame
 
   void _initializeGame() {
     currentScore.value = 0;
-    world.add(Ground(position: Vector2(0, size.y / 3)));
+    world.add(Ground(position: Vector2(0, (size.y) / 3)));
     world.add(player = Player(position: Vector2(0, 250)));
     camera.moveTo(Vector2(0, 0));
     _generateGameComponents(Vector2(0, 20));
