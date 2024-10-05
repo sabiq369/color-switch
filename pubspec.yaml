@@ -37,8 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flame:
   flame_audio:
-  lottie:
-  flame_lottie:
+
 
 dev_dependencies:
   flutter_test:
