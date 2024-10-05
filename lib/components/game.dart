@@ -5,7 +5,6 @@ import 'package:color_switch/components/player.dart';
 import 'package:color_switch/components/star_component.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/rendering.dart';
 import 'package:flutter/material.dart';
