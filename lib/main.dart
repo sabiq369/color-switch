@@ -1,6 +1,5 @@
 import 'package:color_switch/components/game.dart';
 import 'package:flame/game.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,7 +34,6 @@ class _HomePageState extends State<HomePage> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        // backgroundColor: Colors.transparent,
         body: SafeArea(
           child: ValueListenableBuilder(
             valueListenable: _myGame.mute,
@@ -53,40 +51,24 @@ class _HomePageState extends State<HomePage> {
                           });
                         },
                         icon: const Icon(Icons.pause)),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: SafeArea(
-                      child: ValueListenableBuilder(
-                        valueListenable: _myGame.currentScore,
-                        builder: (context, value, child) {
-                          return Text(
-                            'Score: ${value.toString()}',
-                            style: const TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
                   if (_myGame.isGamePlaying)
                     Align(
                       alignment: Alignment.topRight,
-                      child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              mute = !mute;
-                              if (mute) {
-                                FlameAudio.bgm.pause();
-                              } else {
-                                FlameAudio.bgm.resume();
-                              }
-                            });
-                          },
-                          icon: mute
-                              ? const Icon(Icons.music_off)
-                              : const Icon(Icons.music_note)),
+                      child: ValueListenableBuilder(
+                        valueListenable: _myGame.currentScore,
+                        builder: (context, value, child) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Text(
+                              'Score: ${value.toString()}',
+                              style: const TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   if (_myGame.isGamePaused)
                     Container(

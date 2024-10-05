@@ -19,15 +19,15 @@ class MyGame extends FlameGame
 
   MyGame(
       {this.gameColors = const [
-        Colors.redAccent,
-        Colors.yellowAccent,
-        Colors.blueAccent,
-        Colors.purpleAccent
+        Color(0xff1E3D59),
+        Color(0xffF5F0E1),
+        Color(0xffFF6E40),
+        Color(0xffFFC13B),
       ]})
       : super(
           camera: CameraComponent.withFixedResolution(
             width: 600,
-            height: 1000,
+            height: 1200,
           ),
         );
 
@@ -112,7 +112,6 @@ class MyGame extends FlameGame
   }
 
   gameOver() {
-    // FlameAudio.bgm.stop();
     for (var element in world.children) {
       element.removeFromParent();
     }
